@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Blocken Championship Pro - Professional Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="theme-color" content="#1FB8CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div class="container">
+        <!-- Professional Start Screen -->
+        <div id="start-screen" class="start-screen">
+            <div class="championship-logo">
+                <div class="logo-animation">
+                    <div class="logo-cube"></div>
+                    <div class="logo-cube"></div>
+                    <div class="logo-cube"></div>
+                </div>
+                <h1 class="championship-title">BLOCKEN CHAMPIONSHIP</h1>
+                <p class="championship-subtitle">Professional Edition</p>
+            </div>
+
+            <div class="main-menu">
+                <button class="menu-btn menu-btn--primary" id="tournament-mode-btn">
+                    <span class="btn-icon">🏆</span>
+                    <span class="btn-text">Championship Tournament</span>
+                    <span class="btn-desc">Fight through the ultimate bracket</span>
+                </button>
+                
+                <button class="menu-btn menu-btn--secondary" id="quick-fight-btn">
+                    <span class="btn-icon">⚡</span>
+                    <span class="btn-text">Quick Fight</span>
+                    <span class="btn-desc">Single battle against AI</span>
+                </button>
+                
+                <button class="menu-btn menu-btn--tertiary" id="training-mode-btn">
+                    <span class="btn-icon">🥊</span>
+                    <span class="btn-text">Training Mode</span>
+                    <span class="btn-desc">Practice your skills</span>
+                </button>
+            </div>
+
+            <div class="championship-features">
+                <div class="feature-highlight">
+                    <span class="feature-icon">🎯</span>
+                    <span class="feature-text">Advanced AI System</span>
+                </div>
+                <div class="feature-highlight">
+                    <span class="feature-icon">🌪️</span>
+                    <span class="feature-text">Dynamic Weather</span>
+                </div>
+                <div class="feature-highlight">
+                    <span class="feature-icon">💥</span>
+                    <span class="feature-text">Cinematic Combat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Difficulty Selection -->
+        <div id="difficulty-select" class="difficulty-select hidden">
+            <div class="difficulty-header">
+                <h2>Select AI Difficulty</h2>
+                <p>Choose your challenge level</p>
+            </div>
+
+            <div class="difficulty-grid">
+                <div class="difficulty-card" data-difficulty="easy">
+                    <div class="difficulty-icon">🥉</div>
+                    <h3 class="difficulty-name">Rookie</h3>
+                    <p class="difficulty-desc">Perfect for beginners learning the ropes</p>
+                    <div class="difficulty-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">Aggression</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Defense</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 20%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Complexity</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-card" data-difficulty="medium">
+                    <div class="difficulty-icon">🥈</div>
+                    <h3 class="difficulty-name">Contender</h3>
+                    <p class="difficulty-desc">Balanced opponent with solid fundamentals</p>
+                    <div class="difficulty-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">Aggression</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Defense</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Complexity</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-card" data-difficulty="hard">
+                    <div class="difficulty-icon">🥇</div>
+                    <h3 class="difficulty-name">Champion</h3>
+                    <p class="difficulty-desc">Aggressive fighter with advanced strategies</p>
+                    <div class="difficulty-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">Aggression</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Defense</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Complexity</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-card" data-difficulty="expert">
+                    <div class="difficulty-icon">👑</div>
+                    <h3 class="difficulty-name">Legend</h3>
+                    <p class="difficulty-desc">Master-level opponent with perfect execution</p>
+                    <div class="difficulty-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">Aggression</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Defense</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Complexity</span>
+                            <div class="stat-meter">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="difficulty-actions">
+                <button class="btn btn--secondary" id="difficulty-back">Back to Menu</button>
+                <button class="btn btn--primary" id="difficulty-confirm" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Tournament Bracket -->
+        <div id="tournament-bracket" class="tournament-bracket hidden">
+            <div class="tournament-header">
+                <h2>Championship Tournament</h2>
+                <div class="tournament-progress">
+                    <span class="current-round">Round 1 of 3</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="tournament-progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bracket-container">
+                <div class="bracket-round" id="bracket-round-1">
+                    <h3>Quarter Finals</h3>
+                    <div class="bracket-matches">
+                        <div class="bracket-match" data-match="1">
+                            <div class="match-fighter player">
+                                <span class="fighter-name" id="player-bracket-name">Player</span>
+                                <div class="fighter-avatar" id="player-bracket-avatar"></div>
+                            </div>
+                            <div class="match-vs">VS</div>
+                            <div class="match-fighter opponent">
+                                <div class="fighter-avatar" id="opponent-1-avatar"></div>
+                                <span class="fighter-name" id="opponent-1-name">Yukito</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bracket-round" id="bracket-round-2">
+                    <h3>Semi Finals</h3>
+                    <div class="bracket-matches">
+                        <div class="bracket-match" data-match="2">
+                            <div class="match-fighter">
+                                <span class="fighter-name">Winner 1</span>
+                                <div class="fighter-avatar"></div>
+                            </div>
+                            <div class="match-vs">VS</div>
+                            <div class="match-fighter">
+                                <div class="fighter-avatar"></div>
+                                <span class="fighter-name">Winner 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bracket-round" id="bracket-round-3">
+                    <h3>Championship Finals</h3>
+                    <div class="bracket-matches">
+                        <div class="bracket-match championship-match" data-match="3">
+                            <div class="match-fighter">
+                                <span class="fighter-name">Finalist 1</span>
+                                <div class="fighter-avatar"></div>
+                            </div>
+                            <div class="match-vs">🏆</div>
+                            <div class="match-fighter">
+                                <div class="fighter-avatar"></div>
+                                <span class="fighter-name">Finalist 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tournament-actions">
+                <button class="btn btn--secondary" id="tournament-back">Back to Menu</button>
+                <button class="btn btn--primary" id="start-tournament">Begin Tournament</button>
+            </div>
+        </div>
+
+        <!-- Character Selection -->
+        <div id="character-select" class="character-select hidden">
+            <div class="select-header">
+                <h2>Select Your Fighter</h2>
+                <div class="weather-indicator">
+                    <span class="weather-icon" id="current-weather-icon">🌤️</span>
+                    <span class="weather-text" id="current-weather-name">Generating Arena...</span>
+                </div>
+            </div>
+
+            <div class="character-grid">
+                <div class="character-card" data-character="yukito">
+                    <div class="character-3d-preview" id="preview-yukito">🥊</div>
+                    <h3>Yukito</h3>
+                    <p class="character-title">The Iron Fist</p>
+                    <p class="character-specialty">Meteor Strike Combo</p>
+                    <div class="character-features">
+                        <span class="feature-tag">🥊 Boxing Master</span>
+                        <span class="feature-tag">⚡ Charge Attacks</span>
+                        <span class="feature-tag">💥 Meteor Punch</span>
+                    </div>
+                </div>
+                
+                <div class="character-card" data-character="yuka">
+                    <div class="character-3d-preview" id="preview-yuka">🌸</div>
+                    <h3>Yuka</h3>
+                    <p class="character-title">The Rose Warrior</p>
+                    <p class="character-specialty">Petal Storm Barrage</p>
+                    <div class="character-features">
+                        <span class="feature-tag">🥊 Elegant Style</span>
+                        <span class="feature-tag">🌸 Grace Combos</span>
+                        <span class="feature-tag">💖 Rose Power</span>
+                    </div>
+                </div>
+                
+                <div class="character-card" data-character="chao">
+                    <div class="character-3d-preview" id="preview-chao">🐉</div>
+                    <h3>Chao</h3>
+                    <p class="character-title">The Dragon Master</p>
+                    <p class="character-specialty">Dragon Hurricane</p>
+                    <div class="character-features">
+                        <span class="feature-tag">🦵 Kick Master</span>
+                        <span class="feature-tag">🐉 Dragon Power</span>
+                        <span class="feature-tag">🌪️ Hurricane Kicks</span>
+                    </div>
+                </div>
+                
+                <div class="character-card" data-character="chaoli">
+                    <div class="character-3d-preview" id="preview-chaoli">🦋</div>
+                    <h3>Chaoli</h3>
+                    <p class="character-title">The Phoenix Dancer</p>
+                    <p class="character-specialty">Phoenix Storm Dance</p>
+                    <div class="character-features">
+                        <span class="feature-tag">🦵 Phoenix Style</span>
+                        <span class="feature-tag">🦋 Dance Combos</span>
+                        <span class="feature-tag">💜 Storm Dance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-actions">
+                <button class="btn btn--secondary" id="character-back">Back</button>
+                <button class="btn btn--primary" id="character-confirm" disabled>Enter Arena</button>
+            </div>
+        </div>
+
+        <!-- Game Arena -->
+        <div id="game-container" class="game-container hidden">
+            <!-- Enhanced Game UI -->
+            <div class="game-ui">
+                <div class="top-hud">
+                    <div class="weather-status">
+                        <span class="weather-icon" id="game-weather-icon">🌤️</span>
+                        <span class="weather-name" id="game-weather-name">Clear Championship</span>
+                        <div class="weather-effects" id="weather-effects"></div>
+                    </div>
+                    
+                    <div class="combo-display">
+                        <div class="combo-counter" id="combo-counter">0 COMBO</div>
+                        <div class="style-rating" id="style-rating">★★★☆☆</div>
+                        <div class="damage-meter">
+                            <span id="total-damage-display">0 DMG</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-indicators">
+                        <div class="perfect-guard hidden" id="perfect-guard-indicator">
+                            <span>🛡️ PERFECT!</span>
+                        </div>
+                        <div class="slow-motion hidden" id="slow-motion-indicator">
+                            <span>⏰ SLOW-MO</span>
+                        </div>
+                        <div class="super-flash hidden" id="super-flash-indicator">
+                            <span>💥 SUPER!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="health-section">
+                    <div class="fighter-status player-status">
+                        <div class="fighter-info">
+                            <div class="fighter-name" id="player-name">PLAYER</div>
+                            <div class="fighter-title" id="player-title">Fighter</div>
+                        </div>
+                        <div class="health-bar">
+                            <div class="health-fill" id="player-health"></div>
+                            <div class="health-text">100%</div>
+                        </div>
+                        <div class="meter-row">
+                            <div class="super-meter">
+                                <div class="super-fill" id="player-super"></div>
+                                <span class="meter-label">SUPER</span>
+                            </div>
+                            <div class="charge-meter">
+                                <div class="charge-fill" id="player-charge"></div>
+                                <span class="meter-label">CHARGE</span>
+                            </div>
+                        </div>
+                        <div class="status-effects" id="player-effects"></div>
+                    </div>
+                    
+                    <div class="vs-section">
+                        <div class="vs-text">CHAMPIONSHIP</div>
+                        <div class="round-info">
+                            <div class="round-number" id="round-number">ROUND 1</div>
+                            <div class="round-timer" id="round-timer">∞</div>
+                        </div>
+                    </div>
+                    
+                    <div class="fighter-status enemy-status">
+                        <div class="fighter-info">
+                            <div class="fighter-name" id="enemy-name">AI</div>
+                            <div class="fighter-title" id="enemy-title">Opponent</div>
+                        </div>
+                        <div class="health-bar">
+                            <div class="health-fill" id="enemy-health"></div>
+                            <div class="health-text">100%</div>
+                        </div>
+                        <div class="meter-row">
+                            <div class="super-meter">
+                                <div class="super-fill" id="enemy-super"></div>
+                                <span class="meter-label">SUPER</span>
+                            </div>
+                            <div class="charge-meter">
+                                <div class="charge-fill" id="enemy-charge"></div>
+                                <span class="meter-label">CHARGE</span>
+                            </div>
+                        </div>
+                        <div class="status-effects" id="enemy-effects"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D Arena -->
+            <div id="three-container" class="three-container"></div>
+
+            <!-- Mobile Controls -->
+            <div class="mobile-controls" id="mobile-controls">
+                <div class="virtual-joystick" id="virtual-joystick">
+                    <div class="joystick-base">
+                        <div class="joystick-knob" id="joystick-knob"></div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="attack-btn light-attack" id="light-btn" data-key="j">
+                        <span class="btn-label">LIGHT</span>
+                    </button>
+                    <button class="attack-btn heavy-attack" id="heavy-btn" data-key="k">
+                        <span class="btn-label">HEAVY</span>
+                    </button>
+                    <button class="attack-btn combo-attack" id="combo-btn" data-key="l">
+                        <span class="btn-label">COMBO</span>
+                    </button>
+                    <button class="special-btn super-move" id="super-btn" data-key="u">
+                        <span class="btn-label">SUPER</span>
+                    </button>
+                </div>
+
+                <div class="utility-buttons">
+                    <button class="util-btn guard-btn" id="guard-btn" data-key="g">
+                        <span class="btn-label">GUARD</span>
+                    </button>
+                    <button class="util-btn jump-btn" id="jump-btn" data-key=" ">
+                        <span class="btn-label">JUMP</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="performance-info" id="performance-info">
+                <span id="fps-counter">60 FPS</span>
+                <span id="particles-counter">0 Particles</span>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victory-screen" class="victory-screen hidden">
+            <div class="victory-content">
+                <div class="victory-animation" id="victory-animation">🏆</div>
+                <h2 id="victory-title">CHAMPIONSHIP VICTORY!</h2>
+                <div class="victory-character" id="victory-character-display"></div>
+                <div class="victory-stats" id="victory-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Total Damage:</span>
+                        <span class="stat-value" id="final-damage">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Max Combo:</span>
+                        <span class="stat-value" id="final-combo">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Perfect Guards:</span>
+                        <span class="stat-value" id="final-guards">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Battle Time:</span>
+                        <span class="stat-value" id="final-time">0s</span>
+                    </div>
+                </div>
+                <div class="victory-message" id="victory-message">You are the Champion!</div>
+                <div class="victory-buttons">
+                    <button class="btn btn--primary" id="victory-continue">Continue Tournament</button>
+                    <button class="btn btn--secondary" id="victory-menu">Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tournament Complete -->
+        <div id="tournament-complete" class="tournament-complete hidden">
+            <div class="championship-celebration">
+                <div class="trophy-animation">🏆</div>
+                <h1>TOURNAMENT CHAMPION!</h1>
+                <p class="championship-message">You have conquered the Championship Tournament!</p>
+                <div class="championship-stats" id="tournament-final-stats">
+                    <div class="champion-title">
+                        <span class="title-text" id="champion-character-name">Champion</span>
+                        <span class="title-subtitle">Blocken Championship Winner</span>
+                    </div>
+                </div>
+                <div class="championship-actions">
+                    <button class="btn btn--primary" id="new-tournament">New Tournament</button>
+                    <button class="btn btn--secondary" id="championship-menu">Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-animation">
+                    <div class="loading-cube"></div>
+                    <div class="loading-cube"></div>
+                    <div class="loading-cube"></div>
+                </div>
+                <h2 id="loading-title">Loading Championship Arena...</h2>
+                <div class="loading-bar">
+                    <div class="loading-fill" id="loading-progress"></div>
+                </div>
+                <p id="loading-text">Initializing professional combat systems...</p>
+                <div class="loading-features">
+                    <span class="feature">✓ Advanced AI System</span>
+                    <span class="feature">✓ Dynamic Weather Engine</span>
+                    <span class="feature">✓ Cinematic Combat</span>
+                    <span class="feature">✓ Tournament Brackets</span>
+                    <span class="feature">✓ Professional Quality</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
